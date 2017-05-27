@@ -23,7 +23,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+//$config['base_url'] = '';
+
+define('SERVER_NAME_DEV', 'localhost');
+define('SERVER_NAME_EMPRESA', 'estad.lerolero.cl');
+define('SERVER_NAME_FINAL', 'www.mountain.cl');
+define('SERVER_NAME_LOCAL', '192.168.1.100');
+
+$nombreServerActual = $_SERVER['SERVER_NAME'];
+switch($nombreServerActual)
+{
+    case SERVER_NAME_DEV:
+            $config['base_url']    = "http://localhost/estadistica/";
+            break;
+    case SERVER_NAME_EMPRESA:
+            $config['base_url']    = "http://estad.lerolero.cl";
+            break;
+    case SERVER_NAME_FINAL:
+            $config['base_url']    = "http://www.mountain.cl";
+            break;
+    case SERVER_NAME_LOCAL:
+            $config['base_url']    = "http://192.168.1.100/mountain/";
+            break;
+    default:
+            $config['base_url']    = $_SERVER['SERVER_NAME'];
+            break;
+}
 
 /*
 |--------------------------------------------------------------------------
