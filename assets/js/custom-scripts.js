@@ -3,6 +3,17 @@
     License: Commons Attribution 3.0
     http://creativecommons.org/licenses/by/3.0/
 ---------------------------------------------------------  */
+function base_url() {
+    var pathparts = location.pathname.split('/');
+    if (location.host == 'localhost') {
+        var url = location.origin+'/'+pathparts[1].trim('/')+'/'; // http://localhost/myproject/
+    }else{
+        var url = location.origin; // http://stackoverflow.com
+    }
+    return url;
+}
+
+
 
 (function ($) {
     "use strict";
@@ -26,54 +37,50 @@
             Morris.Bar({
                 element: 'morris-bar-chart',
                 data: [{
-                    y: '2006',
-                    a: 100,
-                    b: 90
+                    y: '1',
+                    a: 10,
+                    b: 7
                 }, {
-                    y: '2007',
-                    a: 75,
-                    b: 65
+                    y: '2',
+                    a: 15,
+                    b: 14
                 }, {
-                    y: '2008',
-                    a: 50,
-                    b: 40
-                }, {
-                    y: '2009',
-                    a: 75,
-                    b: 65
-                }, {
-                    y: '2010',
-                    a: 50,
-                    b: 40
-                }, {
-                    y: '2011',
-                    a: 75,
-                    b: 65
-                }, {
-                    y: '2012',
-                    a: 100,
-                    b: 90
+                    y: '3',
+                    a: 13,
+                    b: 13
+                
                 }],
                 xkey: 'y',
                 ykeys: ['a', 'b'],
-                labels: ['Series A', 'Series B'],
+                labels: ['Inscritos', 'Pagado'],
                 hideHover: 'auto',
                 resize: true
             });
+            
+            $.ajax({
+				  type: 'POST',
+				  url: base_url()+'Daniel/vergrafico',
+				  data: '',
+				  success: function(data) {
+					alert(data.body);
+				
+				  }
+			});
+            
 
             /* MORRIS DONUT CHART
 			----------------------------------------*/
             Morris.Donut({
                 element: 'morris-donut-chart',
                 data: [{
-                    label: "Download Sales",
-                    value: 12
+                    label: "Total usuarios",
+                    value: 10
                 }, {
-                    label: "In-Store Sales",
-                    value: 30
+                    label: "Total hombres",
+                    value: 6
                 }, {
-                    label: "Mail-Order Sales",
-                    value: 20
+                    label: "Total mujeres",
+                    value: 4
                 }],
                 resize: true
             });
